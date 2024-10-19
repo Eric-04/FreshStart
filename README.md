@@ -7,6 +7,6 @@
 ## backend setup
 NOTE: backend will not work without .env file
 
-1. virtualenv -p python3 freshstart_env
+1. python -m venv freshstart_env 
 2. source freshstart_env/bin/activate
 3. pip install -r requirements.txt
