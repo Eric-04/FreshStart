@@ -9,11 +9,13 @@ function Home() {
 
 function App() {
   return (
-    <BrowserRouter> {/* Wrap Routes with BrowserRouter */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/first-time" element={<FirstTimeUser />} />
-      </Routes>
+    <BrowserRouter>
+      <div className="App"> {/* Ensure this div applies the App styles */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/first-time" element={<FirstTimeUser />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
