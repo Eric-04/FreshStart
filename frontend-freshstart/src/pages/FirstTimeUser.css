@@ -1,0 +1,15 @@
+/* src/pages/FirstTimeUser.css */
+.first-time-user-container {
+    background-color: white; /* Background color of the box */
+    border-radius: 20px; /* Curved corners */
+    padding: 20px; /* Space inside the box */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    max-width: 1500px; /* Optional: limit the width of the box */
+    margin: 50px auto; /* Center the box horizontally */
+  }
+  
+.first-time-user-text {
+    text-align: center; /* Center the text */
+    color : black; /* Optional: text color */
+    font-size: 1.2em; /* Optional: adjust font size */
+  }

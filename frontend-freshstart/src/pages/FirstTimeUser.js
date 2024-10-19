@@ -1,7 +1,20 @@
-import React from "react";
+import React from 'react';
+import './FirstTimeUser.css'; 
+import DropdownButton from '../components/DropdownButton';
 
-const FirstTimeUser = () =>  {
-    return <h1>home Page</h1>
-};
+
+function FirstTimeUser() {
+  return (
+    <div className="first-time-user-container">
+        <div className="first-time-user-text">
+        <h2>Thank You For Choosing FreshStart!</h2>
+        <h2>I am a...</h2>
+        <DropdownButton />
+        </div>
+    </div>
+  );
+}
 
 export default FirstTimeUser;
+
+
