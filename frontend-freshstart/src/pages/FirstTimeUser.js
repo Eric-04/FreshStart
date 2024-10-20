@@ -1,4 +1,3 @@
-// src/pages/FirstTimeUser.js
 import React, { useState } from 'react';
 import { db } from '../firebase'; // Import your Firebase config
 import { collection, addDoc } from 'firebase/firestore';
