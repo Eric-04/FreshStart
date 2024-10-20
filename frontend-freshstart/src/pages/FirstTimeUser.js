@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { db } from '../firebase'; // Import your Firebase config
 import { collection, addDoc } from 'firebase/firestore';
 import './FirstTimeUser.css'; 
-import DropdownButton from '../components/DropdownButton';
+import DropdownButton from '../components/FirstTimeComponent';
 
 function FirstTimeUser() {
   const [name, setName] = useState('');
