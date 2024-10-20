@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Menu, MenuItem, TextField, Box } from '@mui/material';
 import axios from 'axios';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 function FirstTimeComponent() {
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRole, setSelectedRole] = useState('');
   const [name, setName] = useState('');
@@ -24,22 +27,32 @@ function FirstTimeComponent() {
   };
 
   const showNextButton = selectedRole !== '';
-const isNextButtonDisabled = selectedRole !== '' && 
-  (selectedRole === 'Organizer' || selectedRole === 'Restaurant')
+  const isNextButtonDisabled = selectedRole !== '' && 
+  (selectedRole === 'Organization' || selectedRole === 'Restaurant')
   ? name.trim() === '' || address.trim() === '' || city.trim() === '' || state.trim() === ''
   : false;
 
   const handleSubmit = async () => {
+    const user = auth.currentUser;
+    console.log('Current user:', user);
+
     let fill = ''; // Initialize fill variable
 
     // Use `if` statements with proper syntax
-    if (selectedRole === 'Organizer') {
-      fill = 'organizer'; // Fixed spelling of 'organizer'
+    if (selectedRole === 'Organization') {
+      fill = 'organization'; // Fixed spelling of 'organization'
     } else if (selectedRole === 'Restaurant') {
       fill = 'restaurant';
     }
 
+
     try {
+      // Add selected role to Firestore
+      const userRef = doc(db, 'users', user.uid); // Replace 'user-id' with the actual user ID or reference
+      await setDoc(userRef, {
+        role: selectedRole, // Save the selected role
+      }, { merge: true });
+
       const response = await axios.post(`http://127.0.0.1:5000/${fill}/add`, {
         name,
         address,
@@ -48,6 +61,7 @@ const isNextButtonDisabled = selectedRole !== '' &&
       });
       console.log('Data saved successfully:', response.data);
       
+
       setName('');
       setAddress('');
       setCity('');
@@ -66,10 +80,10 @@ const isNextButtonDisabled = selectedRole !== '' &&
       </Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={() => handleSelection('Volunteer')}>Volunteer</MenuItem>
-        <MenuItem onClick={() => handleSelection('Organizer')}>Organizer</MenuItem>
+        <MenuItem onClick={() => handleSelection('Organization')}>Organization</MenuItem>
         <MenuItem onClick={() => handleSelection('Restaurant')}>Restaurant</MenuItem>
       </Menu>
-      {(selectedRole === 'Organizer' || selectedRole === 'Restaurant') && (
+      {(selectedRole === 'Organization' || selectedRole === 'Restaurant') && (
         <Box sx={{ marginTop: 2 }}>
           <TextField
             label="Name"
