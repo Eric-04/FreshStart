@@ -27,4 +27,10 @@ class MongoDB:
     def get_restaurant_collection(self):
         return self.client['General']['Restaurant']
     
+    def get_appointment_collection(self):
+        return self.client['General']['Appointment']
+    
+    def get_volunteer_collection(self):
+        return self.client['General']['Appointment']
+    
 mongo_db = MongoDB()
