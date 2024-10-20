@@ -91,7 +91,7 @@ function FirstTimeComponent() {
         pickTime: selectedRole === 'Organization' ? pickTime : undefined,
         closeTime: selectedRole === 'Organization' ? closeTime : undefined,
       });
-
+      console.log("HELLO");
       // Navigate to the appropriate page based on the selected role
       if (selectedRole === 'Organization') {
         navigate('/submission'); // Navigate to the submission page for Organization
