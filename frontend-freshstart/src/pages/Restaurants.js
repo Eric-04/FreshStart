@@ -50,8 +50,6 @@ const Restaurant = () => {
         pickTime,
         closeTime,
         pound,
-        isUnder4Hours, // Include checkbox value
-        isChilledTo30Degrees, // Include checkbox value
       });
       console.log('Response:', response.data);
 
