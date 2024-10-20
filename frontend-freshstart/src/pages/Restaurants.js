@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, List, ListItem, ListItemText, Checkbox, FormControlLabel } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
 import axios from 'axios'; // Import Axios
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -9,7 +9,6 @@ const Restaurant = () => {
   const [pickTime, setPickTime] = useState('');
   const [closeTime, setCloseTime] = useState('');
   const [pound, setPound] = useState('');
-  const [appointments, setAppointments] = useState([]); // State to hold fetched appointments
 
   // New state for checkboxes
   const [isUnder4Hours, setIsUnder4Hours] = useState(false);
@@ -18,26 +17,6 @@ const Restaurant = () => {
   const navigate = useNavigate();
   const userId = auth.currentUser?.uid; // Get the current user's ID
   const userName = auth.currentUser?.displayName || 'User'; // Fallback if displayName is not available
-
-  // Function to fetch appointments
-  const fetchAppointments = async () => {
-    if (!userId) return; // Exit if userId is not available
-
-    try {
-      const response = await axios.get(`http://127.0.0.1:5000/appointment/get/${userId}`); // Replace with your actual endpoint
-      if (response) {
-        setAppointments([response.data]); // Set appointments state
-      }
-    } catch (error) {
-      console.error('Error fetching appointments:', error);
-      // Handle error (e.g., show error message)
-    }
-  };
-
-  // Call fetchAppointments when the component mounts
-  useEffect(() => {
-    fetchAppointments();
-  }, [userId]);
 
   const handleSubmit = async () => {
     // Check if userId is available
@@ -66,8 +45,6 @@ const Restaurant = () => {
       setIsUnder4Hours(false); // Reset checkbox
       setIsChilledTo30Degrees(false); // Reset checkbox
 
-      // Fetch updated appointments
-      fetchAppointments();
     } catch (error) {
       console.error('Error posting data:', error);
       // Handle error (e.g., show error message)
@@ -156,23 +133,6 @@ const Restaurant = () => {
         >
           Submit
         </Button>
-
-        {/* Displaying the appointments */}
-        <div style={{ marginTop: '32px' }}>
-          <Typography variant="h6" gutterBottom>
-            Your Appointments
-          </Typography>
-          <List>
-            {console.log(appointments)}
-            {appointments.map((appointment, index) => (
-              <ListItem key={index}>
-                <ListItemText
-                  primary={`Date: ${appointment.date}, Pickup: ${appointment.pickTime}, Close: ${appointment.closeTime}, Pounds: ${appointment.pound}`}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </div>
       </div>
     </div>
   );
