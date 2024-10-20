@@ -33,19 +33,18 @@ function FirstTimeComponent() {
   const showNextButton = selectedRole !== '';
 
   const isNextButtonDisabled =
-  selectedRole === 'Volunteer' ? false : // Enable button for Volunteer
-  selectedRole !== '' && (
+    selectedRole === 'Volunteer' ? false : // Enable button for Volunteer
+    selectedRole !== '' && (
       (selectedRole === 'Organization' || selectedRole === 'Restaurant') &&
       (name.trim() === '' ||
        address.trim() === '' ||
        city.trim() === '' ||
        state.trim() === '' ||
        (selectedRole === 'Organization' && (pickTime.trim() === '' || closeTime.trim() === '')))
-  );
+    );
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
-    console.log('Current user:', user);
 
     if (selectedRole === 'Volunteer') {
       // If the role is Volunteer, simply save the role to Firestore
@@ -61,15 +60,7 @@ function FirstTimeComponent() {
         navigate('/volunteer');
 
         // Reset all fields after saving
-        setName('');
-        setAddress('');
-        setCity('');
-        setState('');
-        setSelectedRole('');
-        setPickTime('');
-        setCloseTime('');
-        setAnchorEl(null);
-
+        resetFields();
 
       } catch (error) {
         console.error('Error saving data for volunteer:', error);
@@ -101,20 +92,30 @@ function FirstTimeComponent() {
         closeTime: selectedRole === 'Organization' ? closeTime : undefined,
       });
 
-      console.log('Data saved successfully:', response.data);
+      // Navigate to the appropriate page based on the selected role
+      if (selectedRole === 'Organization') {
+        navigate('/submission'); // Navigate to the submission page for Organization
+      } else if (selectedRole === 'Restaurant') {
+        navigate('/restaurant'); // Navigate to the restaurant page for Restaurant
+      }
 
       // Reset all fields after saving
-      setName('');
-      setAddress('');
-      setCity('');
-      setState('');
-      setSelectedRole('');
-      setPickTime('');
-      setCloseTime('');
-      setAnchorEl(null);
+      resetFields();
+
     } catch (error) {
       console.error('Error saving data:', error);
     }
+  };
+
+  const resetFields = () => {
+    setName('');
+    setAddress('');
+    setCity('');
+    setState('');
+    setSelectedRole('');
+    setPickTime('');
+    setCloseTime('');
+    setAnchorEl(null);
   };
 
   return (

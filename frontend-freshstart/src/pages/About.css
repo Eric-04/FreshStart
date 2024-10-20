@@ -1,0 +1,24 @@
+/* About.css */
+.about-container {
+    max-width: 800px; /* Limit width for readability */
+    margin: 0 auto; /* Center align the content */
+    padding: 20px; /* Add padding */
+    text-align: center; /* Center align text */
+  }
+  
+  .about-container h1 {
+    font-size: 3rem; /* Larger font for main title */
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  .about-container h2 {
+    font-size: 2rem; /* Subheading size */
+    margin-top: 20px; /* Space above the subheading */
+  }
+  
+  .about-container p {
+    font-size: 1.2rem; /* Standard paragraph font size */
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 15px; /* Space between paragraphs */
+  }
+  
