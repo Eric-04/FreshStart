@@ -52,7 +52,7 @@ function MapPage() {
     const [organizationCoords, setOrganizationCoords] = useState([]);
     const [restaurantCoords, setRestaurantCoords] = useState([]);
 
-    const positionStackApiKey = process.env.MAPTILER_API_KEY;
+    const positionStackApiKey = process.env.REACT_APP_MAPTILER_API_KEY;
     
 
     // Fetch data from backend endpoint

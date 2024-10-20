@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
 import Confetti from 'react-confetti';
 
 const Submission = () => {

@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import axios from 'axios'; 
+import { auth } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { TextField, Button, Typography } from '@mui/material';
+import {useNavigate } from 'react-router-dom';
 
 const Volunteer = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [user] = useAuthState(auth); // Use useAuthState to get the current user
+  const userName = user ? user.displayName : ''; // Ensure user is not null
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log(`City: ${city}, State: ${state}`);
-    // You can perform further actions like saving data to a database
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(`http://127.0.0.1:5000/volunteer/add`, {
+        userName, 
+        city,
+        state,
+      });
+      navigate('/map-display');
+      
+      // You can perform further actions like saving data to a database
+    } catch (error) {
+      console.error('Error submitting volunteer data:', error);
+      // Handle error (e.g., show error message)
+    }
   };
 
   return (
     <div className="white-container">
       <div className="white-text">
-        <h2 style={{ textAlign: 'center' }}>
+        <Typography variant="h5" align="center">
           Thank You For Volunteering, Please Indicate Where You Are From To Get Started
-        </h2>
+        </Typography>
 
-        <div style={{ marginBottom: '16px', marginTop: '16px'}}>
+        <div style={{ marginBottom: '16px', marginTop: '16px' }}>
           <TextField
             label="City (e.g. Providence)"
             variant="outlined"
