@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase'; // Import your Firebase config
 import { collection, addDoc } from 'firebase/firestore';
-import './FirstTimeUser.css'; 
+import './Layout.css'; 
 import FirstTimeComponent from '../components/FirstTimeComponent';
 
 function FirstTimeUser() {
@@ -31,8 +31,8 @@ function FirstTimeUser() {
   };
 
   return (
-    <div className="first-time-user-container">
-      <div className="first-time-user-text">
+    <div className="white-container">
+      <div className="white-text">
         <h2>Thank You For Choosing FreshStart!</h2>
         <h2>I am a...</h2>
         <FirstTimeComponent />
