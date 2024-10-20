@@ -25,7 +25,9 @@ const Restaurant = () => {
 
     try {
       const response = await axios.get(`http://127.0.0.1:5000/appointment/get/${userId}`); // Replace with your actual endpoint
-      setAppointments(response.data); // Set appointments state
+      if (response) {
+        setAppointments([response.data]); // Set appointments state
+      }
     } catch (error) {
       console.error('Error fetching appointments:', error);
       // Handle error (e.g., show error message)
@@ -161,6 +163,7 @@ const Restaurant = () => {
             Your Appointments
           </Typography>
           <List>
+            {console.log(appointments)}
             {appointments.map((appointment, index) => (
               <ListItem key={index}>
                 <ListItemText
