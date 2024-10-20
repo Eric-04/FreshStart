@@ -1,6 +1,16 @@
 from flask import jsonify, Request
 from mongodb import mongo_db
 
+def get_restaurants():
+    restaurants = mongo_db.get_restaurant_collection()
+    restaurant = restaurants.find()
+    if restaurant is None:
+        return jsonify({"error": "Restaurants not found"}), 404
+    result = []
+    for app in restaurant:
+        result.append({k : app[k] for k in app if k != 'id' and k != '_id'})
+    return jsonify(result), 201
+
 def get_restaurant_info(id):
     restaurants = mongo_db.get_restaurant_collection()
     restaurant = restaurants.find_one({"id" : id})

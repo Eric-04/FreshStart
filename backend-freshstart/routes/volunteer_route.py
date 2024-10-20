@@ -4,17 +4,17 @@ from controllers.volunteer_controller import get_volunteer_info, add_volunteer_i
 # Define a blueprint
 volunteer_bp = Blueprint('volunteer_bp', __name__)
 
-# Route for general contact information
-@volunteer_bp.route('/volunteer/get/<id>')
+# route for specific volunteer information
+@volunteer_bp.route('/volunteer/get/<id>', methods=['GET'])
 def get_info(id):
     return get_volunteer_info(id)
 
-# Route to add a contact
+# route to add a volunteer
 @volunteer_bp.route('/volunteer/add', methods=['POST'])
 def add_info():
     return add_volunteer_info(request)
 
-# Route to get a specific contact
-@volunteer_bp.route('/volunteer/add/get', methods=['GET'])
+# route to update a volunteer
+@volunteer_bp.route('/volunteer/update', methods=['POST'])
 def update_info():
     return update_volunteer_info(request)

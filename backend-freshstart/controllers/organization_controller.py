@@ -1,6 +1,16 @@
 from flask import jsonify, Request
 from mongodb import mongo_db
 
+def get_organizations():
+    organizations = mongo_db.get_organization_collection()
+    organization = organizations.find()
+    if organization is None:
+        return jsonify({"error": "Organizations not found"}), 404
+    result = []
+    for app in organization:
+        result.append({k : app[k] for k in app if k != 'id' and k != '_id'})
+    return jsonify(result), 201
+
 def get_organization_info(id):
     organizations = mongo_db.get_organization_collection()
     organization = organizations.find_one({"id" : id})

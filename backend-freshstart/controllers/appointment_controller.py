@@ -1,6 +1,16 @@
 from flask import jsonify, Request
 from mongodb import mongo_db
 
+def get_appointments():
+    appointments = mongo_db.get_appointment_collection()
+    appointment = appointments.find()
+    if appointment is None:
+        return jsonify({"error": "Appointments not found"}), 404
+    result = []
+    for app in appointment:
+        result.append({k : app[k] for k in app if k != 'id' and k != '_id'})
+    return jsonify(result), 201
+
 def get_appointment_info(id):
     appointments = mongo_db.get_appointment_collection()
     appointment = appointments.find_one({"id" : id})
