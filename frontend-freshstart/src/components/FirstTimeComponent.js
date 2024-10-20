@@ -24,33 +24,41 @@ function FirstTimeComponent() {
   };
 
   const showNextButton = selectedRole !== '';
-  const isNextButtonDisabled = selectedRole !== '' && (selectedRole === 'Organizer' || selectedRole === 'Restaurant')
-    ? name.trim() === '' || address.trim() === '' || city.trim() === '' || state.trim() === ''
-    : false;
+const isNextButtonDisabled = selectedRole !== '' && 
+  (selectedRole === 'Organizer' || selectedRole === 'Restaurant')
+  ? name.trim() === '' || address.trim() === '' || city.trim() === '' || state.trim() === ''
+  : false;
 
+  const handleSubmit = async () => {
+    let fill = ''; // Initialize fill variable
 
-    const handleSubmit = async () => {
-      try {
-        const response = await axios.post('http://your-flask-api-url/api/save', {
-          name,
-          address,
-          city,
-          state,
-          role: selectedRole, // Send the selected role as well
-        });
-        console.log('Data saved successfully:', response.data);
-        // Optionally reset the form fields after successful submission
-        setName('');
-        setAddress('');
-        setCity('');
-        setState('');
-        setSelectedRole('');
-        setAnchorEl(null);
-      } catch (error) {
-        console.error('Error saving data:', error);
-      }
-    };
-    
+    // Use `if` statements with proper syntax
+    if (selectedRole === 'Organizer') {
+      fill = 'organizer'; // Fixed spelling of 'organizer'
+    } else if (selectedRole === 'Restaurant') {
+      fill = 'restaurant';
+    }
+
+    try {
+      const response = await axios.post(`http://127.0.0.1:5000/${fill}/add`, {
+        name,
+        address,
+        city,
+        state,
+      });
+      console.log('Data saved successfully:', response.data);
+      
+      setName('');
+      setAddress('');
+      setCity('');
+      setState('');
+      setSelectedRole('');
+      setAnchorEl(null);
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
+
   return (
     <Box>
       <Button variant="contained" onClick={handleClick}>
