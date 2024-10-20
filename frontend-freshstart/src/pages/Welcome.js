@@ -4,6 +4,7 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { auth, db } from '../firebase';
+import './Welcome.css'
 
 const Welcome = () => {
   const [user, loading] = useAuthState(auth);
@@ -61,22 +62,25 @@ const Welcome = () => {
  
  
   return (
-    <div>
+    <div className="welcome-container">
       {user ? (
         <>
-          <h1>Welcome, {user.displayName}!</h1>
-          <p>You're now signed in.</p>
-          <button onClick={signOut}>Sign Out</button>
+          <h1 className="welcome-message">Welcome, {user.displayName}!</h1>
+          <p className="user-status">You're now signed in.</p>
+          <button className="custom-button" onClick={signOut}>Sign Out</button>
         </>
       ) : (
         <>
-          <h1>Welcome to Our App!</h1>
-          <p>Please sign in to continue:</p>
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
+          <div className="freshstart-container">
+            <h1 className="freshstart">FreshStart</h1>
+          </div>
+          <p className="tagline">Every Bite Counts: Help Us Recover.</p>
+          <button className="custom-button" onClick={signInWithGoogle}>Sign in with Google</button>
         </>
       )}
     </div>
   );
+  
  };
 
 export default Welcome;

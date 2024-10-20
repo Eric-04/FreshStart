@@ -4,6 +4,7 @@ import FirstTimeUser from './pages/FirstTimeUser';
 import Welcome from './pages/Welcome';
 import Navbar from './Navbar'; // Import the Navbar component
 import Restaurants from './pages/Restaurants';
+import Organizers from './pages/Organizers';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="/first-time" element={<FirstTimeUser />} />
           <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/organizers" element={<Organizers />} />
         </Routes>
       </div>
     </BrowserRouter>
