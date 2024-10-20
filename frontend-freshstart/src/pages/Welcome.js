@@ -5,7 +5,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { auth, db } from '../firebase';
 
-
 const Welcome = () => {
  const [user, loading] = useAuthState(auth);
  const navigate = useNavigate(); // Initialize navigate
@@ -79,6 +78,3 @@ const Welcome = () => {
    </div>
  );
 };
-
-
-export default Welcome;
