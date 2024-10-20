@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
+import axios from 'axios'; 
+import { auth } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Volunteer = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [user] = useAuthState(auth); // Use useAuthState to get the current user
 
-  const handleSubmit = () => {
-    console.log(`City: ${city}, State: ${state}`);
-    // You can perform further actions like saving data to a database
+  const userName = user ? user.displayName : ''; // Ensure user is not null
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(`http://127.0.0.1:5000/appointment/volunteer/add`, {
+        userName, 
+        city,
+        state,
+      });
+      
+      console.log('Response from server:', response.data);
+      // You can perform further actions like saving data to a database
+    } catch (error) {
+      console.error('Error submitting volunteer data:', error);
+      // Handle error (e.g., show error message)
+    }
   };
 
   return (
@@ -17,7 +34,7 @@ const Volunteer = () => {
           Thank You For Volunteering, Please Indicate Where You Are From To Get Started
         </h2>
 
-        <div style={{ marginBottom: '16px', marginTop: '16px'}}>
+        <div style={{ marginBottom: '16px', marginTop: '16px' }}>
           <TextField
             label="City (e.g. Providence)"
             variant="outlined"
