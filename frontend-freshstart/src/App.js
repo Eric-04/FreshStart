@@ -4,8 +4,8 @@ import FirstTimeUser from './pages/FirstTimeUser';
 import Welcome from './pages/Welcome';
 import Navbar from './Navbar'; // Import the Navbar component
 import Restaurants from './pages/Restaurants';
+import Organizers from './pages/Organizers';
 import Volunteer from './pages/Volunteer';
-
 import MapPage from './pages/MapPage';
 
 
@@ -20,8 +20,8 @@ function App() {
 
           <Route path= "/volunteer" element={<Volunteer/>}/>
           <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/organizers" element={<Organizers />} />
           <Route path="/map-display" element={<MapPage/>} />
-
         </Routes>
       </div>
     </BrowserRouter>

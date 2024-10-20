@@ -1,0 +1,46 @@
+.freshstart-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-end; /* Align items at the bottom of the container */
+    height: 45vh; /* Adjust height as needed to position lower */
+  }
+  
+  .freshstart {
+    font-size: 5rem; /* Adjust size as needed */
+    font-weight: bold;
+    color: #ffffff; /* Change color if desired */
+    margin: 0; /* Remove default margin */
+  }
+  .welcome-container {
+    text-align: center; /* Center text and buttons */
+  }
+  
+  .tagline {
+    font-size: 1.5rem; /* Adjust tagline font size */
+    margin-top: 1rem; /* Space above the tagline */
+    margin-bottom: 1.5rem;
+  }
+  
+  .welcome-message {
+    font-size: 2.5rem; /* Size for welcome message */
+  }
+  
+  .user-status {
+    font-size: 1.2rem; /* Size for user status message */
+  }
+  
+  .custom-button {
+    background-color: #28a745; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.2rem; /* Font size for button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+  }
+  
+  .custom-button:hover {
+    background-color: #218838; /* Darker shade on hover */
+  }
+  
