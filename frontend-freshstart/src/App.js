@@ -5,7 +5,7 @@ import Welcome from './pages/Welcome';
 import Navbar from './Navbar'; // Import the Navbar component
 import Restaurants from './pages/Restaurants';
 import Volunteer from './pages/Volunteer';
-
+import Submission from './pages/Submission';
 import MapPage from './pages/MapPage';
 
 
@@ -17,9 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/first-time" element={<FirstTimeUser />} />
-
           <Route path= "/volunteer" element={<Volunteer/>}/>
           <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/submission" element={<Submission />} />
           <Route path="/map-display" element={<MapPage/>} />
 
         </Routes>
