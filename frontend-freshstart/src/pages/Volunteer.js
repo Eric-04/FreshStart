@@ -1,26 +1,41 @@
 import React, { useState } from 'react';
+
 import axios from 'axios'; 
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { TextField, Button, Typography } from '@mui/material';
 import {useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
+
+
 
 const Volunteer = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [user] = useAuthState(auth); // Use useAuthState to get the current user
+
   const userName = user ? user.displayName : ''; // Ensure user is not null
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
       const response = await axios.post(`http://127.0.0.1:5000/volunteer/add`, {
+
+
+  const userName = user ? user.displayName : ''; // Ensure user is not null
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(`http://127.0.0.1:5000/appointment/volunteer/add`, {
+
         userName, 
         city,
         state,
       });
       navigate('/map-display');
-      
+
+      console.log('Response from server:', response.data);
+
       // You can perform further actions like saving data to a database
     } catch (error) {
       console.error('Error submitting volunteer data:', error);
