@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { db } from '../firebase'; // Import your Firebase config
 import { collection, addDoc } from 'firebase/firestore';
 import './FirstTimeUser.css'; 
-import DropdownButton from '../components/FirstTimeComponent';
+import FirstTimeComponent from '../components/FirstTimeComponent';
 
 function FirstTimeUser() {
   const [name, setName] = useState('');
@@ -35,28 +35,10 @@ function FirstTimeUser() {
       <div className="first-time-user-text">
         <h2>Thank You For Choosing FreshStart!</h2>
         <h2>I am a...</h2>
-        <DropdownButton />
+        <FirstTimeComponent />
       </div>
       <form onSubmit={handleSubmit} className="user-form">
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Save User</button>
+
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
