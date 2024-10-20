@@ -1,12 +1,15 @@
 // src/components/DropdownButton.js
 import React, { useState } from 'react';
 import { Button, Menu, MenuItem, TextField, Box } from '@mui/material';
+import axios from 'axios';
 
 function DropdownButton() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRole, setSelectedRole] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,13 +26,36 @@ function DropdownButton() {
 
   const showNextButton = selectedRole !== '';
   const isNextButtonDisabled = selectedRole !== '' && (selectedRole === 'Organizer' || selectedRole === 'Restaurant')
-    ? name.trim() === '' || address.trim() === ''
+    ? name.trim() === '' || address.trim() === '' || city.trim() === '' || state.trim() === ''
     : false;
 
+
+    const handleSubmit = async () => {
+      try {
+        const response = await axios.post('http://your-flask-api-url/api/save', {
+          name,
+          address,
+          city,
+          state,
+          role: selectedRole, // Send the selected role as well
+        });
+        console.log('Data saved successfully:', response.data);
+        // Optionally reset the form fields after successful submission
+        setName('');
+        setAddress('');
+        setCity('');
+        setState('');
+        setSelectedRole('');
+        setAnchorEl(null);
+      } catch (error) {
+        console.error('Error saving data:', error);
+      }
+    };
+    
   return (
     <Box>
       <Button variant="contained" onClick={handleClick}>
-        Choose...
+        {selectedRole === '' ? 'Choose...' : `Selected: ${selectedRole}`} {/* Update button text based on selection */}
       </Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={() => handleSelection('Volunteer')}>Volunteer</MenuItem>
@@ -47,11 +73,28 @@ function DropdownButton() {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Address"
+            label="St. Address"
             variant="outlined"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             fullWidth
+            sx={{ marginBottom: 2 }}
+          />
+            <TextField
+            label="City"
+            variant="outlined"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            fullWidth
+            sx={{ marginBottom: 2 }}
+          />
+        <TextField
+            label="State"
+            variant="outlined"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            fullWidth
+            sx={{ marginBottom: 2 }}
           />
         </Box>
       )}
@@ -67,8 +110,9 @@ function DropdownButton() {
             variant="contained" 
             color="primary" 
             disabled={isNextButtonDisabled}
+            onClick={handleSubmit}
           >
-            Next as {selectedRole} {/* Display selected role in the button text */}
+            Continue {/* Display selected role in the button text */}
           </Button>
         </Box>
       )}

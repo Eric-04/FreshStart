@@ -1,6 +1,6 @@
 import React from 'react';
 import './FirstTimeUser.css'; 
-import DropdownButton from '../components/DropdownButton';
+import DropdownButton from '../components/FirstTimeComponent';
 
 
 function FirstTimeUser() {
