@@ -11,12 +11,12 @@ html, body {
 
 body {
   margin: 0;
-  background-image: url('../public/food_background.jpg'); /* Corrected syntax and path */
+  background-color: rgb(96, 131, 96);
   background-size: cover; /* Ensure the image covers the entire background */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   background-attachment: fixed; /* Keep the background fixed when scrolling */
-  color: white; /* Set default text color */
+  color: rgb(255, 255, 255); /* Set default text color */
 }
 
 #root {

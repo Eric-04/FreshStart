@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 40px; /* Increased padding for a longer navbar */
+    background-color: #ffffff; /* Dark background */
+    color: rgb(0, 0, 0); /* White text */
+    width: 100%; /* Full width */
+  }
+  
+  .navbar-title {
+    font-size: 30px;
+  }
+  
+  .navbar-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sign-in-button {
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Ensure consistent padding for buttons */
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sign-in-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
