@@ -8,6 +8,8 @@ from pathlib import Path
 from routes.home_route import home_bp
 from routes.organization_route import organization_bp
 from routes.restaurant_route import restaurant_bp
+from routes.appointment_route import appointment_bp
+from routes.volunteer_route import volunteer_bp
 
 # load .env file
 dotenv_path = Path(__file__).resolve().parent / '.env'
@@ -26,6 +28,8 @@ CORS(application)
 application.register_blueprint(home_bp)
 application.register_blueprint(organization_bp)
 application.register_blueprint(restaurant_bp)
+application.register_blueprint(appointment_bp)
+application.register_blueprint(volunteer_bp)
 
 if __name__ == '__main__':
     application.run(debug=True, port=PORT)
