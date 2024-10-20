@@ -21,4 +21,10 @@ class MongoDB:
     def list_databases(self):
         return self.databases
     
+    def get_organization_collection(self):
+        return self.client['General']['Organization']
+    
+    def get_restaurant_collection(self):
+        return self.client['General']['Restaurant']
+    
 mongo_db = MongoDB()
