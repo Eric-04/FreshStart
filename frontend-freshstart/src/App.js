@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FirstTimeUser from './pages/FirstTimeUser';
 import Welcome from './pages/Welcome';
 import Navbar from './Navbar'; // Import the Navbar component
+import Restaurants from './pages/Restaurants';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/first-time" element={<FirstTimeUser />} />
+          <Route path="/restaurants" element={<Restaurants />} />
         </Routes>
       </div>
     </BrowserRouter>
