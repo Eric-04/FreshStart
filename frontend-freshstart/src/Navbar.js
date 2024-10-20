@@ -1,3 +1,4 @@
+// Navbar.js
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
@@ -23,10 +24,23 @@ const Navbar = () => {
     navigate('/'); // Navigate to the Welcome page
   };
 
+  const goToAbout = () => {
+    navigate('/about'); // Navigate to the About page
+  };
+  const goToHome = () => {
+    navigate('/'); // Navigate to the About page
+  };
+
   return (
     <nav className="navbar">
       <h1 className="navbar-title">FreshStart</h1>
       <div className="navbar-links">
+      <button onClick={goToHome} className="about-button">
+          Home
+        </button>
+        <button onClick={goToAbout} className="about-button">
+          About
+        </button>
         {user ? (
           <>
             <button onClick={signOut} className="sign-in-button">Sign Out</button>

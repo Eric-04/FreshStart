@@ -7,7 +7,7 @@ import Restaurants from './pages/Restaurants';
 import Organizers from './pages/Organizers';
 import Volunteer from './pages/Volunteer';
 import MapPage from './pages/MapPage';
-
+import About from './pages/About';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/organizers" element={<Organizers />} />
           <Route path="/map-display" element={<MapPage/>} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     </BrowserRouter>
