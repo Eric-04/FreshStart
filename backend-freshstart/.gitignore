@@ -1,2 +1,6 @@
 .env
 freshstart_env
+
+__pycache__
+routes/__pycache__
+controllers/__pycache__
