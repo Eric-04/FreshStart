@@ -3,6 +3,25 @@ import  MapWithPins from '../components/Map';
 
 function MapPage() {
 
+    const [restaurantData, setRestaurantData] = useState([]);
+    const [organizationData, setOrganizationData] = useState([]);
+    const [coordinates, setCoordinates] = useState([]);
+
+    // Fetch data from backend endpoint
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('YOUR_BACKEND_ENDPOINT'); // Replace with your backend endpoint
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
     <div >
         <MapWithPins
