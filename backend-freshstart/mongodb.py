@@ -31,6 +31,6 @@ class MongoDB:
         return self.client['General']['Appointment']
     
     def get_volunteer_collection(self):
-        return self.client['General']['Appointment']
+        return self.client['General']['Volunteer']
     
 mongo_db = MongoDB()
