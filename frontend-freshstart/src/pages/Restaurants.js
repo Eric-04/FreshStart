@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { TextField, Button, Typography, List, ListItem, ListItemText, Checkbox, FormControlLabel } from '@mui/material';
 import axios from 'axios'; // Import Axios
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
 
 const Restaurant = () => {
   const [date, setDate] = useState('');
@@ -11,6 +10,10 @@ const Restaurant = () => {
   const [closeTime, setCloseTime] = useState('');
   const [pound, setPound] = useState('');
   const [appointments, setAppointments] = useState([]); // State to hold fetched appointments
+
+  // New state for checkboxes
+  const [isUnder4Hours, setIsUnder4Hours] = useState(false);
+  const [isChilledTo30Degrees, setIsChilledTo30Degrees] = useState(false);
 
   const navigate = useNavigate();
   const userId = auth.currentUser?.uid; // Get the current user's ID
@@ -35,7 +38,6 @@ const Restaurant = () => {
   }, [userId]);
 
   const handleSubmit = async () => {
-
     // Check if userId is available
     if (!userId) {
       console.error('Error: User ID not found.');
@@ -48,17 +50,20 @@ const Restaurant = () => {
         pickTime,
         closeTime,
         pound,
+        isUnder4Hours, // Include checkbox value
+        isChilledTo30Degrees, // Include checkbox value
       });
       console.log('Response:', response.data);
 
       navigate('/submission');
 
-      
       // Reset form fields after submission
       setDate('');
       setPickTime('');
       setCloseTime('');
       setPound('');
+      setIsUnder4Hours(false); // Reset checkbox
+      setIsChilledTo30Degrees(false); // Reset checkbox
 
       // Fetch updated appointments
       fetchAppointments();
@@ -114,12 +119,39 @@ const Restaurant = () => {
           />
         </div>
 
+        {/* Checkboxes for additional conditions */}
+        <div style={{ marginTop: '16px' }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={isUnder4Hours}
+                onChange={(e) => setIsUnder4Hours(e.target.checked)}
+                color="primary" // Checkbox color
+              />
+            }
+            label="Food was out for no more than 4 hours"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={isChilledTo30Degrees}
+                onChange={(e) => setIsChilledTo30Degrees(e.target.checked)}
+                color="primary" // Checkbox color
+              />
+            }
+            label="Food was chilled to 30 degrees"
+          />
+        </div>
+
         <Button
           variant="contained"
           color="primary"
           onClick={handleSubmit}
           fullWidth
-          disabled={!date || !pickTime || !closeTime || !pound} // Disable button if any field is empty
+          disabled={
+            !date || !pickTime || !closeTime || !pound || 
+            !isUnder4Hours || !isChilledTo30Degrees // Disable if any condition is not met
+          }
         >
           Submit
         </Button>
