@@ -83,20 +83,19 @@ function FirstTimeComponent() {
       }, { merge: true });
 
       const response = await axios.post(`http://127.0.0.1:5000/${fill}/add`, {
-        name,
-        address,
-        city,
-        state,
-        selectedRole,
-        pickTime: selectedRole === 'Organization' ? pickTime : undefined,
-        closeTime: selectedRole === 'Organization' ? closeTime : undefined,
+        name : name,
+        street_address : address,
+        city : city,
+        state : state,
+        opening_time: selectedRole === 'Organization' ? pickTime : undefined,
+        closing_time: selectedRole === 'Organization' ? closeTime : undefined,
       });
       console.log("HELLO");
       // Navigate to the appropriate page based on the selected role
       if (selectedRole === 'Organization') {
         navigate('/submission'); // Navigate to the submission page for Organization
       } else if (selectedRole === 'Restaurant') {
-        navigate('/restaurant'); // Navigate to the restaurant page for Restaurant
+        navigate('/restaurants'); // Navigate to the restaurant page for Restaurant
       }
 
       // Reset all fields after saving

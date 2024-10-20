@@ -46,10 +46,11 @@ const Restaurant = () => {
 
     try {
       const response = await axios.post(`http://127.0.0.1:5000/appointment/add`, {
-        userId,
-        pickTime,
-        closeTime,
-        pound,
+        id : userId,
+        day : date,
+        start_time : pickTime,
+        end_time : closeTime,
+        pounds : pound,
       });
       console.log('Response:', response.data);
 
